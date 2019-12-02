@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
     current_user.id != nil
   end
 
-  def require_login
-    return redirect_to controller: "sessions", action: "new" unless current_user
+
+  def authorize_user
+    unless logged_in?
+      flash[:notice] = "You need to login to access this page."
+      redirect_to new_session_path
+    end
   end
+
 end

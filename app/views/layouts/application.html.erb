@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+        <h3><%= flash[:notice] %></h3>
+    <% end %>
+
     <%= yield %>
+
+    <% if session[:user_id] %>
+      <p><%= link_to("Log out", session_path, method: :delete) %>
+    <% end %>
   </body>
 </html>

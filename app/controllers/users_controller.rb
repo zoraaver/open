@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: :show
+  before_action :authorize_user, except: :new
+
+  def index
+    @users = filter_users
+  end
 
   def show
   end
@@ -27,5 +32,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def filter_users
+    !params[:q] || params[:q] == "" ? User.all : User.select { |u| u.name == params[:q] }
   end
 end
