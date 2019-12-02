@@ -7,16 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-i = 0
-
 10.times do
-    u = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password_digest: "password#{i}", age: rand(13..50), bio: Faker::Quote.famous_last_words)
+    u = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: rand(13..50), bio: Faker::Quote.famous_last_words)
 
     3.times do 
         u.posts.build(content: Faker::Quote.yoda, likes: 0).save
     end
 
-    i += 1
 end
 
 i = 0

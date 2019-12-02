@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user
+  before_action :set_user, only: :show
+  before_action :authorize_user, except: :new
 
 
   def show
