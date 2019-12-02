@@ -1,12 +1,15 @@
- <form action="/users" accept-charset="UTF-8" method="get">
-   <label for="q">Search for users:</label>
-   <input type="text" name="q" id="q">
-  <input type="submit" name="commit" value="Search">
-</form>
+ 
+ <%if current_user == @user %>
+    <form action="/users" accept-charset="UTF-8" method="get">
+      <label for="q">Search for users:</label>
+      <input type="text" name="q" id="q">
+     <input type="submit" name="commit" value="Search">
+    </form>
+<% end %>
 
 
 
-<h2>You have <%= @user.friends.count %> friends:</h2>
+<h2><%= @user.name %> has <%= @user.friends.count %> friends:</h2>
 
 <% @user.friends.each do |u| %>
     <p><%= link_to(u.name, user_path(u))%></p>

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @post = Post.new
     @user = User.find(params[:id])
   end
 
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def friend_page
-    
+    @user = User.find(params[:id])
   end
 
   private

@@ -2,6 +2,15 @@
 
 <h4>Comments:</h4>
 
-<%= render(@post.comments) || "" %>
+<%= form_for(@comment) do |f| %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.text_area :content %><br>
+
+    <%= f.submit %>
+<% end %>
+
+<%= render(@post.comments.order(created_at: :desc)) || "" %>
 
 <p><%= link_to("Back", user_path(@post.user))%>
