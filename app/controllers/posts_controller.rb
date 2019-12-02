@@ -1,10 +1,24 @@
 class PostsController < ApplicationController
 
-    before_action :set_post
+    before_action :set_post, only: :show
     before_action :authorize_user
 
     def show
-        
+        @comment = Comment.new
+    end
+
+
+    def create
+
+        @post = Post.create(post_params)
+
+        if @post.save
+            redirect_to user_path(current_user)
+        else
+            flash[:notice] = "Post must have content!"
+            redirect_to user_path(current_user)
+        end
+
     end
 
     private

@@ -5,8 +5,20 @@
 <p>Age: <%= @user.age %></p>
 <p><%= link_to("Friends", user_friends_path(@user))%>
 
+
+
 <h3>Posts</h3>
 
-<% @user.posts.each do |p| %>
+<% if current_user == @user %>
+    <%= form_for(@post) do |f| %>
+
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <%= f.text_area :content %><br>
+
+        <%= f.submit %>
+    <% end %>
+<% end %>
+
+<% @user.posts.order(created_at: :desc).each do |p| %>
     <p><%= link_to(p.content, post_path(p))%></p>
 <% end %>
