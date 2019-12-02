@@ -7,8 +7,8 @@ class User < ApplicationRecord
 
     def friends
     
-        first = Friendship.where("user_id == #{self.id}").pluck(:friend_id)
-        second = Friendship.where("friend_id == #{self.id}").pluck(:user_id)
+        first = Friendship.where("user_id == #{self.id} AND status == 'accepted'").pluck(:friend_id)
+        second = Friendship.where("friend_id == #{self.id} AND status == 'accepted'").pluck(:user_id)
 
         (first + second).map{|i| User.find(i)}
     end

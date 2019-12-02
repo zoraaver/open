@@ -1,0 +1,7 @@
+<h2>Your have <%= @user.friends.count %> friends:</h2>
+
+<% @user.friends.each do |f| %>
+    <p><%= link_to(f.name, user_path(f))%></p>
+<% end %>
+
+<p><%= link_to("Back", user_path(@user)) %></p>

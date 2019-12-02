@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
     before_action :set_post
+    before_action :authorize_user
 
     def show
         

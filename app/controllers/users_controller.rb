@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def friend_page
+    
+  end
+
   private
 
   def user_params
