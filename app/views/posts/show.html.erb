@@ -1,0 +1,7 @@
+<h3><%= @post.content%></h3>
+
+<h4>Comments:</h4>
+
+<%= render(@post.comments) || "" %>
+
+<p><%= link_to("Back", user_path(@post.user))%>
