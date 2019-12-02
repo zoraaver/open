@@ -24,6 +24,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def friend_page
+    
+  end
+
   private
 
   def user_params
