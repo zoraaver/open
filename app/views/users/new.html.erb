@@ -1,5 +1,9 @@
+
 <h1>Welcome to OPEN</h1>
 <h3>Create account</h3>
+
+<%= render "form"%>
+
 <%= form_for @user do |f| %>
   <div><%= f.label :name %>
   <%= f.text_field :name %></div><br>
