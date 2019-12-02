@@ -9,8 +9,8 @@ class User < ApplicationRecord
     
         first = Friendship.where("user_id == #{self.id} AND status == 'accepted'").pluck(:friend_id)
         second = Friendship.where("friend_id == #{self.id} AND status == 'accepted'").pluck(:user_id)
-
-        (first + second).map{|i| User.find(i)}
+        user_ids = first + second
+        User.where(id: user_ids).order(:name)
     end
     
 
