@@ -1,17 +1,8 @@
- <%= form_with(url: "/users", method: "get") do %>
-   <%= label_tag(:q, "Search for users:") %>
+ <%= form_tag users_path, method: :get do %>
+    <%= label_tag(:q, "Search for users:") %>
    <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>
  <% end %>
-
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user_path(user) %> 
-    </li>
-    <br>
-  <% end %>
-</ul>
 
 
 

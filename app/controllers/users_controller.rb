@@ -4,9 +4,11 @@ class UsersController < ApplicationController
 
   def index
     @users = filter_users
+    @friendship = Friendship.new
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def new
@@ -25,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def friend_page
-    
   end
 
   private
@@ -39,6 +40,6 @@ class UsersController < ApplicationController
   end
 
   def filter_users
-    !params[:q] || params[:q] == "" ? User.all : User.select { |u| u.name == params[:q] }
+    User.select { |u| u.name == params[:q] }
   end
 end

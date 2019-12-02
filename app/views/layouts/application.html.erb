@@ -7,6 +7,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <nav>
+      <% if session[:user_id] %>
+        <p><%= link_to("My Profile", user_path(current_user))%>
+        <%= link_to("Log out", session_path(current_user.id), method: :delete) %></p>
+      <% end %>
+    </nav>
+
   </head>
 
   <body>
@@ -16,8 +24,6 @@
 
     <%= yield %>
 
-    <% if session[:user_id] %>
-      <p><%= link_to("Log out", session_path, method: :delete) %>
-    <% end %>
+    
   </body>
 </html>
