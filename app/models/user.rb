@@ -13,4 +13,10 @@ class User < ApplicationRecord
         (first + second).map{|i| User.find(i)}
     end
     
+
+    validates :name, presence: true
+    has_many :posts, dependent: :destroy
+    has_many :comments, dependent: :destroy
+
+
 end
