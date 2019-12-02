@@ -1,24 +1,28 @@
 class UsersController < ApplicationController
-
   before_action :set_user, only: :show
   before_action :authorize_user, except: :new
 
+  def index
+    @users = filter_users
+  end
 
   def show
     @user = User.find(params[:id])
   end
-   
-  
+
   def new
     @user = User.new
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
 
-    return redirect_to controller: "users", action: "new" unless @user.save
-    session[:user_id] = @user.id
-    redirect_to user_path(@user)
+    if @user.valid?
+      @user.save
+      redirect_to user_path(@user)
+    else
+      render :new
+    end
   end
 
   def friend_page
@@ -35,4 +39,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def filter_users
+    !params[:q] || params[:q] == "" ? User.all : User.select { |u| u.name == params[:q] }
+  end
 end
