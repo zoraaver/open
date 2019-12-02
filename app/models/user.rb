@@ -17,6 +17,10 @@ class User < ApplicationRecord
         user_ids = first + second
         User.where(id: user_ids).order(:name)
     end
+
+    def self.find_friends(sought_name)
+        User.where('name LIKE ?', "%#{sought_name}%").order(:name)
+    end
     
 
 end

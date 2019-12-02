@@ -1,8 +1,26 @@
 <h1>Found users</h1>
-<%@users.each do |u| %>
-<%=u.name%> 
-<%=form_for @frienship do |f|%>
-<% f.hidden_field :user_id, value: current_user.id%>
-<% f.hidden_field :friend_id, value: u.id%>
-<% f.submit, "Add a user to your friends list"%>
-<%end %>
+
+
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_path(user) %> 
+    </li>
+
+    <% if !current_user.friends.find_by(id: user.id) %>
+        <%= form_for @friendship do |f| %>
+
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :friend_id, value: user.id %>
+            <%= f.hidden_field :status, value: "accepted"%>
+            <%= f.submit "Add friend" %>
+
+        <% end %>
+
+    <% else %>
+            Already Friends
+    <% end %>
+    
+    <br>
+  <% end %>
+</ul>
