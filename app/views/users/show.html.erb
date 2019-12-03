@@ -1,4 +1,4 @@
-<h2><% if @user == current_user %> Hello <% end %> <%= @user.name %></h2>
+<h2><%= display_profile_header(@user) %></h2>
 
 <img src=<%= @user.img_url%> alt="profile-pic">
 

@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
-  resources :posts do
-    resources :likes
+  resources :posts, except: [:new, :index] do
+    resources :likes, only: [:create, :destroy]
   end
 
-  resources :comments
-  resources :friendships
+  resources :comments, except: [:show, :new, :index]
+  resources :friendships, only: [:create, :update, :destroy]
   resources :users
-  resources :sessions
+  resources :sessions, only: :destroy
 
   get "/login" => "sessions#new"
   post "/login" => "sessions#create"
-  post "/logout" => "sessions#destroy"
   get "users/:id/friends" => "users#friend_page", as: :user_friends
   get "users/:id/friend_requests" => "users#friend_requests", as: :friend_requests
 

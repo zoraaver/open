@@ -14,5 +14,22 @@ module UsersHelper
         end
 
     end 
+
+    def display_profile_header(user)
+        if user == current_user
+            "Hello #{user.name}!"
+        else
+            user.name
+        end
+    end
+
+    def friend_display(user)
+        if user == current_user
+            "You have #{user.friends.count} friends:"
+        else
+            "#{user.name} has #{user.friends.count} friends:"
+        end
+
+    end
     
 end

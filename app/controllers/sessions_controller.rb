@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  def index
-  end
 
   def new
     if logged_in?
@@ -19,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
-    redirect_to new_session_path
+    redirect_to '/login'
   end
   
 end
