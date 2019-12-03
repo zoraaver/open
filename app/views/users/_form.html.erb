@@ -9,3 +9,22 @@
     </ul>
   </div>
 <% end %>
+
+<%= form_for @user do |f| %>
+  <div><%= f.label :name %>
+  <%= f.text_field :name %></div><br>
+
+  <div><%= f.label :email %>
+  <%= f.text_field :email %></div><br>
+
+  <div><%= f.label :age %>
+  <%= f.number_field :age %></div><br>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div><br>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div><br>
+
+  <div><%= f.submit "create account" %></div><br>
+<%end %>

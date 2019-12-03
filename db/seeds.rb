@@ -7,7 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-10.times do
+User.create(name: "zoraaver", email: "zoraaver@gmail.com", password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: 21, bio: "First user")
+
+9.times do
     u = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: rand(13..50), bio: Faker::Quote.famous_last_words)
 
     3.times do 

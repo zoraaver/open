@@ -5,6 +5,18 @@ class FriendshipsController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def update
+    @friendship = Friendship.find(params[:id])
+    @friendship.update(friends_params)
+    redirect_to user_path(current_user)
+  end
+
+  def destroy
+    Friendship.find(params[:id]).destroy
+
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def friends_params

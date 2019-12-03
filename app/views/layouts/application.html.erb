@@ -10,8 +10,11 @@
 
     <nav>
       <% if session[:user_id] %>
-        <p><%= link_to("My Profile", user_path(current_user))%>
-        <%= link_to("Log out", session_path(current_user.id), method: :delete) %></p>
+        <p>
+          <%= link_to("My Profile", user_path(current_user))%>
+          <%= link_to("Friend Requests (#{current_user.received_friend_requests_count})", friend_requests_path(current_user))%>
+          <%= link_to("Log out", session_path(current_user.id), method: :delete) %>
+        </p>
       <% end %>
     </nav>
 

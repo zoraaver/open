@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def index
     
     if params[:q]
-      @friendship = Friendship.new
       @users = User.find_friends(params[:q])
     end
     
@@ -33,6 +32,12 @@ class UsersController < ApplicationController
 
   def friend_page
     @user = User.find(params[:id])
+  end
+
+  def friend_requests
+    @requests = current_user.received_friend_requests
+
+    render "friendships/requests"
   end
 
   private
