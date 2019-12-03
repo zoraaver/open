@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-    before_action :set_post, only: :show
+    before_action :set_post, only: [:show, :edit, :update]
     before_action :authorize_user
 
     def show
@@ -17,6 +17,21 @@ class PostsController < ApplicationController
         else
             flash[:notice] = "Post must have content!"
             redirect_to user_path(current_user)
+        end
+
+    end
+
+    def edit
+
+    end
+
+    def update
+        
+        if @post.update(post_params)
+            redirect_to post_path(@post)
+        else
+            flash[:notice] = "Post must have content!"
+            redirect_to post_path(@post)
         end
 
     end

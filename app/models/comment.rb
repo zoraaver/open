@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
     validates :content, presence: true
 
     def date
-        created_at.strftime("%A %d %B %H:%M")
+        updated_at.strftime("%A %d %B %H:%M")
     end
 
 end
