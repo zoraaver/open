@@ -3,8 +3,10 @@ class UsersController < ApplicationController
   before_action :authorize_user, except: :new
 
   def index
-    @users = filter_users
-    @friendship = Friendship.new
+    if params[:q]
+      @friendship = Friendship.new
+      @users = User.find_friends(params[:q])
+    end
   end
 
   def show
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def friend_page
+    @user = User.find(params[:id])
   end
 
   private
