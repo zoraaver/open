@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: :show
+
   before_action :authorize_user, except: [:new, :create]
 
   def index
@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
       render :new
@@ -42,6 +43,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.friendships.destroy_all
+    @user.destroy
+    session.delete :user_id
+    redirect_to '/login'
+  end
+
   def friend_page
     @user = User.find(params[:id])
   end
@@ -58,11 +67,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :age)
   end
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  def filter_users
-    User.select { |u| u.name == params[:q] }
-  end
 end
