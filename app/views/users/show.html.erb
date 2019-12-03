@@ -1,4 +1,6 @@
-<h2>Hello <%= @user.name %></h2>
+<h2><% if @user == current_user %> Hello <% end %> <%= @user.name %></h2>
+
+<img src=<%= @user.img_url%> alt="profile-pic">
 
 
 <p>Bio: <%= @user.bio %></p>
