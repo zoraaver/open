@@ -1,16 +1,14 @@
 <h3><%= @post.content%></h3>
 
-<h4>Comments:</h4>
-
-<%= form_for(@comment) do |f| %>
-
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :post_id, value: @post.id %>
-    <%= f.text_area :content %><br>
-
-    <%= f.submit %>
+<% if @post.user == current_user %>
+    <%= link_to("Edit", edit_post_path(@post))%>
+    <%= link_to("Delete", post_path(@post), method: :delete)%>
 <% end %>
 
-<%= render(@post.comments.order(created_at: :desc)) || "" %>
+<h4>Comments:</h4>
+
+<%= render({partial: "comments/form", locals: {post: @post, comment: @comment}})%>
+
+<%= render(@post.comments.order(created_at: :desc)) || "Be the first to comment on this post" %>
 
 <p><%= link_to("Back", user_path(@post.user))%>
