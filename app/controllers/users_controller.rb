@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: :show
-  before_action :authorize_user, except: :new
+  before_action :authorize_user, except: [:new, :create]
 
   def index
     if params[:q]

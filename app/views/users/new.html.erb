@@ -2,7 +2,4 @@
 <h1>Welcome to OPEN</h1>
 <h3>Create account</h3>
 
-<%= render "form" %>
-
-
- 
+<%= render(partial: "form", locals: {user: @user}) %>

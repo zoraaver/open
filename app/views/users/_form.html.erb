@@ -1,8 +1,8 @@
-<% if @user.errors.any? %>
+<% if user.errors.any? %>
   <div id="error_explanation">
     
     <ul>
-      <% @user.errors.full_messages.each do |msg| %>
+      <% user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
 
@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_for @user do |f| %>
+<%= form_for(user) do |f| %>
   <div><%= f.label :name %>
   <%= f.text_field :name %></div><br>
 
@@ -20,11 +20,17 @@
   <div><%= f.label :age %>
   <%= f.number_field :age %></div><br>
 
+  <div><%= f.label :bio %>
+  <%= f.text_field :bio %></div><br>
+
+  <div><%= f.label :img_url %>
+  <%= f.text_field :img_url %></div><br>
+
   <div><%= f.label :password %>
   <%= f.password_field :password %></div><br>
 
   <div><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %></div><br>
 
-  <div><%= f.submit "create account" %></div><br>
+  <div><%= f.submit %></div><br>
 <%end %>

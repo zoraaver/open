@@ -2,10 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
 
-  def hello
-    redirect_to controller: "sessions", action: "new" unless session[:name]
-  end
-
   def current_user
     @user = (User.find_by(id: session[:user_id]) || User.new)
   end
@@ -18,7 +14,7 @@ class ApplicationController < ActionController::Base
   def authorize_user
     unless logged_in?
       flash[:notice] = "You need to login to access this page."
-      redirect_to new_session_path
+      redirect_to '/login'
     end
   end
 
