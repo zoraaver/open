@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   before_action :authorize_user, except: :new
 
   def index
-    
     if params[:q]
       @users = User.find_friends(params[:q])
     end
-    
   end
 
   def show
@@ -27,6 +25,20 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       render :new
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render :edit
     end
   end
 
