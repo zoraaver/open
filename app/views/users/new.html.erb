@@ -2,21 +2,7 @@
 <h1>Welcome to OPEN</h1>
 <h3>Create account</h3>
 
-<%= render "form"%>
+<%= render "form" %>
 
-<%= form_for @user do |f| %>
-  <div><%= f.label :name %>
-  <%= f.text_field :name %></div><br>
 
-   <div><%= f.label :email %>
-  <%= f.text_field :email %></div><br>
-
-  <div><%= f.label :password %>
-  <%= f.password_field :password %></div><br>
-
-  <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div><br>
-
-  <div><%= f.submit "create account" %></div><br>
-  <%end %>
  

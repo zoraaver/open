@@ -1,0 +1,7 @@
+<% @requests.each do |r| %> <%# @requests contains a list of users who have sent friend requests%>
+    <p>
+        <%= r.name %> 
+        <%= render(partial: "friendships/request", locals:{friendship: current_user.find_received_friend_request(r)})%>
+    </p>
+
+<% end %>

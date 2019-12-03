@@ -1,0 +1,6 @@
+<%= form_for(friendship) do |f| %>
+    <%= f.hidden_field :status, value: "accepted"%>
+    <%= f.hidden_field :user_id, value: friendship.user_id %>
+    <%= f.hidden_field :friend_id, value: friendship.friend_id%>
+    <%= f.submit "Accept friend request" %>
+<% end %>

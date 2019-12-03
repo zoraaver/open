@@ -3,8 +3,6 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   validates :name, presence: true
   validates :email, uniqueness: true
-  validates :password, length: { in: 6..20 }
-  validates :password, presence: true
   validates_numericality_of :age, greater_than: 13
   validates :bio, presence: true
   validates :bio, length: { minimum: 10 }
@@ -22,9 +20,42 @@ class User < ApplicationRecord
         User.where('name LIKE ?', "%#{sought_name}%").order(:name)
     end
 
-    def friend?(friend)
-        self.friends.find_by(id: friend.id)
+    def friend?(user)
+        self.friends.find_by(id: user.id)
     end
+
+    def friend_request_sent?(user)
+        self.sent_friend_requests.find_by(id: user.id)
+    end
+
+    def find_friendship(user)
+        a = Friendship.find_by(user: self, friend: user)
+        b = Friendship.find_by(user: user, friend: self)
+
+        a || b
+    end
+
+    def sent_friend_requests #returns list of people which have been sent a friend request by this user
+        ids = Friendship.where("user_id == #{self.id} AND status == 'pending'").pluck(:friend_id)
+
+        User.where(id: ids).order(:name)
+    end
+
+    def received_friend_requests #returns list of people which have sent a friend request to this user
+        ids = Friendship.where("friend_id == #{self.id} AND status == 'pending'").pluck(:user_id)
+
+        User.where(id: ids).order(:name)
+    end
+
+    def received_friend_requests_count
+        received_friend_requests.count
+    end
+
+    def find_received_friend_request(friend)
+        Friendship.find_by(user: friend, friend: self)
+    end
+
+
     
 
 end

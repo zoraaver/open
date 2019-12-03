@@ -1,0 +1,8 @@
+<%= form_for(friendship) do |f| %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.hidden_field :status, value: "pending"%>
+    <%= f.submit "Send friend request" %>
+
+<% end %>
