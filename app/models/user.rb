@@ -25,6 +25,10 @@ class User < ApplicationRecord
     def friend?(friend)
         self.friends.find_by(id: friend.id)
     end
+
+    def sent_friend_requests
+        
+    end
     
 
 end

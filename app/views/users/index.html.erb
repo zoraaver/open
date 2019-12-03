@@ -8,15 +8,7 @@
     </li>
 
     <% if !current_user.friend?(user) %>
-        <%= form_for @friendship do |f| %>
-
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :friend_id, value: user.id %>
-            <%= f.hidden_field :status, value: "accepted"%>
-            <%= f.submit "Add friend" %>
-
-        <% end %>
-
+        <%= render({partial: "friendships/form", locals: {user: user, friendship: @friendship}})%>
     <% else %>
             Already Friends
     <% end %>
@@ -24,3 +16,5 @@
     <br>
   <% end %>
 </ul>
+
+<p><%= link_to("Back", user_friends_path(current_user))%>
