@@ -2,8 +2,8 @@
 
 
 <ul>
-<%if @users==[]%>
-<h2>Sorry, user wasn't found</h2>
+<%if @users.empty?%>
+    <h2>Sorry, user wasn't found</h2>
 <%else%>
     <% @users.each do |user| %>
   

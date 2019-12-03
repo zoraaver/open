@@ -4,7 +4,9 @@ module UsersHelper
 
         @friendship = Friendship.new
 
-        if current_user.friend_request_sent?(user) 
+        if user == current_user
+            "You!"
+        elsif current_user.friend_request_sent?(user) 
             "Friend request sent"
         elsif current_user.friend?(user)
             @friendship = current_user.find_friendship(user)

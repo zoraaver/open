@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-User.create(name: "zoraaver", email: "zoraaver@gmail.com", password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: 21, bio: "First user", img_url: "https://picsum.photos/id/#{rand(1..1000)}/200")
+User.create(name: "zoraaver", email: "zoraaver@gmail.com", password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: 21, bio: "First user")
 
 9.times do
-    u = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: rand(13..50), bio: Faker::Quote.famous_last_words, img_url: "https://picsum.photos/id/#{rand(1..1000)}/200")
+    u = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password_digest: "$2a$12$SQkKFkMevR/qwjkwv/D5Del43i/BP7mhYlTzZqaG8ScbMkuJT2S0W", age: rand(13..50), bio: Faker::Quote.famous_last_words)
 
     3.times do 
         u.posts.build(content: Faker::Quote.yoda).save

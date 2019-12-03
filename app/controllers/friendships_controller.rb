@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
 
   def create
     Friendship.create(friends_params)
-    redirect_to user_path(current_user)
+    redirect_to user_path(params[:friendship][:friend_id])
   end
 
   def update
