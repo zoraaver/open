@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-    before_action :set_post, only: [:show, :edit, :update]
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :authorize_user
 
     def show
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     end
 
     def update
-        
+
         if @post.update(post_params)
             redirect_to post_path(@post)
         else
@@ -34,6 +34,10 @@ class PostsController < ApplicationController
             redirect_to post_path(@post)
         end
 
+    end
+
+    def destroy
+        redirect_to user_path(@post.destroy.user)
     end
 
     private
