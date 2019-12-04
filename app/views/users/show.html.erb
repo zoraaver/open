@@ -1,38 +1,53 @@
-<h2><%= display_profile_header(@user) %></h2>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="card" style="width: 18rem;">
+                    <% if @user.profile_pic.attached? %>
+                    <img src=<%=(url_for(@user.profile_pic)) %> width="25%" height="25%" class="card-img-top">
+                    <% end %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= display_profile_header(@user) %></h5>
+                    <p class="card-text"><%= @user.bio %></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Email: <%= @user.email %></li>
+                    <li class="list-group-item"><p>Age: <%= @user.age %></p>
+                  
+                </ul>
+                <div class="card-body">
+                    <p class="card-link"><%= link_to("Friends (#{@user.friend_count})", user_friends_path(@user))%></p>
 
-<% if @user.profile_pic.attached? %>
-    <img src=<%=(url_for(@user.profile_pic)) %> width="25%" height="25%">
-<% end %>
+                <% if current_user != @user %>
+                    <div class="card-link">
+                        <p><%= display_friendship_status(@user) %></p>
+                        <p><%= link_to("Mutual friends (#{current_user.mutual_friend_count(@user)})", mutual_friends_path(@user))%></p>
+                    </div>
+                <% end %>
 
-
-<p>Bio: <%= @user.bio %></p>
-<p>Email: <%= @user.email %></p>
-<p>Age: <%= @user.age %></p>
-<p><%= link_to("Friends (#{@user.friend_count})", user_friends_path(@user))%></p>
-
-<% if current_user != @user %>
-    <p><%= display_friendship_status(@user) %></p>
-    <p><%= link_to("Mutual friends (#{current_user.mutual_friend_count(@user)})", mutual_friends_path(@user))%></p>
-<% end %>
-
-<h3> Most viewed posts</h3>
-
-<ul>
-    <% @user.most_hit.each do |p| %>
-        <li><%= link_to(p.content, post_path(p)) %></li>
-    <% end %>
-</ul>
-
-<h2>All Posts</h2>
-
-
-<% if current_user == @user %>
-    <%= render({partial: "posts/form", locals:{post: @post}})%>
-<% end %>
-
-<% @user.posts.order(created_at: :desc).each do |p| %>
-    <p><%= link_to(p.content, post_path(p))%></p>
-<% end %>
+                </div>
+                </div>
 
 
+        </div>
+        <div class="col-4">
+            <h3> Most viewed posts</h3>
 
+                <ul>
+                    <% @user.most_hit.each do |p| %>
+                        <li><%= link_to(p.content, post_path(p)) %></li>
+                    <% end %>
+                </ul>
+
+                <h2>All Posts</h2>
+
+
+                <% if current_user == @user %>
+                    <%= render({partial: "posts/form", locals:{post: @post}})%>
+                <% end %>
+
+                <% @user.posts.order(created_at: :desc).each do |p| %>
+                    <p><%= link_to(p.content, post_path(p))%></p>
+                <% end %>
+        </div>
+    </div>
+</div>
