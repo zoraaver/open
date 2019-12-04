@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :authorize_user, except: [:new, :create]
 
   def index
@@ -11,6 +10,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = Post.new
+    @most_views = Post.most_hit
   end
 
   def new
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     @user.friendships.destroy_all
     @user.destroy
     session.delete :user_id
-    redirect_to '/login'
+    redirect_to "/login"
   end
 
   def friend_page
@@ -66,5 +66,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :age, :profile_pic)
   end
-
 end
