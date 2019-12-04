@@ -8,10 +8,11 @@
 <p>Bio: <%= @user.bio %></p>
 <p>Email: <%= @user.email %></p>
 <p>Age: <%= @user.age %></p>
-<p><%= link_to("Friends", user_friends_path(@user))%></p>
+<p><%= link_to("Friends (#{@user.friend_count})", user_friends_path(@user))%></p>
 
 <% if current_user != @user %>
     <%= display_friendship_status(@user) %>
+    <p><%= link_to("Mutual friends (#{current_user.mutual_friend_count(@user)})", mutual_friends_path(@user))%></p>
 <% end %>
 
 <h3> Most viewed posts</h3>
