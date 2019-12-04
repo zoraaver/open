@@ -1,4 +1,4 @@
-<h2>You have <%= current_user.mutual_friend_count(@person) %> mutual friends:</h2>
+<h2>You have <%= @mutual_friend_count %> <%= @mutual_friend_count == 1 ? 'mutual friend' : 'mutual friends'%> with <%= @person.name %>: </h2>
 
 <% if !@mutual_friends.empty? %>
     <% @mutual_friends.each do |u| %>

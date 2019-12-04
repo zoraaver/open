@@ -1,5 +1,10 @@
 <h3><%= @post.content%></h3>
 
+<% if @post.user == current_user %>
+    <%= link_to("Edit", edit_post_path(@post))%>
+    <%= link_to("Delete", post_path(@post), method: :delete)%><br>
+<% end %>
+
 
 Number of views: <%= @post.hits %>
 
@@ -13,13 +18,6 @@ Number of views: <%= @post.hits %>
 <% else %>
   <%= button_to 'Like', post_likes_path(@post), method: :post %>
 <% end %>
-
-<% if @post.user == current_user %>
-    <%= link_to("Edit", edit_post_path(@post))%>
-    <%= link_to("Delete", post_path(@post), method: :delete)%>
-<% end %>
-
-
 
 
 

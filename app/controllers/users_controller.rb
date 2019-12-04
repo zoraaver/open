@@ -64,6 +64,7 @@ class UsersController < ApplicationController
   def mutual
     @person = User.find(params[:id])
     @mutual_friends = current_user.mutual_friends(@person)
+    @mutual_friend_count = current_user.mutual_friend_count(@person)
   end
 
   private

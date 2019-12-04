@@ -1,8 +1,15 @@
-<% @requests.each do |r| %> <%# @requests contains a list of users who have sent friend requests%>
-    <p>
-        <%= link_to(r.name, user_path(r)) %><br>
-        <%= display_thumbnail(r) %><br>
-        <%= render(partial: "friendships/request", locals:{friendship: current_user.find_received_friend_request(r)})%>
-    </p>
+<% if !@requests.empty? %>
 
+    <% @requests.each do |r| %> <%# @requests contains a list of users who have sent friend requests%>
+        <p>
+            <%= link_to(r.name, user_path(r)) %><br>
+            <%= display_thumbnail(r) %><br>
+            <%= render(partial: "friendships/request", locals:{friendship: current_user.find_received_friend_request(r)})%>
+        </p>
+
+    <% end %>
+
+<% else %>
+    <h3>Looks like no-one wants to be your friend!</h3>
+    <%= link_to("Back", user_path(current_user))%>
 <% end %>
