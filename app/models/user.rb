@@ -10,11 +10,18 @@ class User < ApplicationRecord
   validates :bio, length: { minimum: 10 }
   has_secure_password
 
-  def friends
+  def friend_ids
     first = Friendship.where("user_id == #{self.id} AND status == 'accepted'").pluck(:friend_id)
     second = Friendship.where("friend_id == #{self.id} AND status == 'accepted'").pluck(:user_id)
     user_ids = first + second
-    User.where(id: user_ids).order(:name)
+  end
+
+  def friends
+    User.where(id: self.friend_ids).order(:name)
+  end
+
+  def friend_count
+    friends.count
   end
 
   def friendships
@@ -62,6 +69,14 @@ class User < ApplicationRecord
 
   def most_hit
     posts.most_hit
+  end
+
+  def mutual_friends(user)
+    User.where(id: self.friend_ids & user.friend_ids).order(:name)
+  end
+
+  def mutual_friend_count(user)
+    mutual_friends(user).count
   end
   
 end

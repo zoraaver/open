@@ -1,0 +1,9 @@
+<h2>You have <%= current_user.mutual_friend_count(@person) %> mutual friends:</h2>
+
+<% if !@mutual_friends.empty? %>
+    <% @mutual_friends.each do |u| %>
+        <p><%= link_to(u.name, user_path(u))%></p>
+    <% end %>
+<% end %>
+
+<p><%= link_to("Back", user_path(@person)) %></p>

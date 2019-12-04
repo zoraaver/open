@@ -61,9 +61,15 @@ class UsersController < ApplicationController
     render "friendships/requests"
   end
 
+  def mutual
+    @person = User.find(params[:id])
+    @mutual_friends = current_user.mutual_friends(@person)
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :age, :profile_pic)
   end
+
 end
