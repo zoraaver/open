@@ -1,5 +1,9 @@
 <h3><%= @post.content%></h3>
 
+
+Number of views: <%= @post.hits %>
+
+
 <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
 
 <% pre_like = @post.likes.find_by(user_id: current_user.id) %>
