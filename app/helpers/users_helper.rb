@@ -8,6 +8,8 @@ module UsersHelper
             "You!"
         elsif current_user.friend_request_sent?(user) 
             "Friend request sent"
+        elsif current_user.friend_request_received?(user)
+            render(partial: "friendships/request", locals:{friendship: current_user.find_received_friend_request(user)})
         elsif current_user.friend?(user)
             @friendship = current_user.find_friendship(user)
             link_to("Unfriend", friendship_path(@friendship), method: :delete)
@@ -30,6 +32,26 @@ module UsersHelper
             "You have #{user.friends.count} friends:"
         else
             "#{user.name} has #{user.friends.count} friends:"
+        end
+
+    end
+
+    def display_profile_pic(user)
+
+        if user.profile_pic.attached?
+            image_tag(url_for(user.profile_pic), class: 'card-img-top')
+        else
+            image_tag("http://linguaviva.com/wp-content/uploads/2017/03/facebook-avatar-300x189.jpg", class: "card-img-top")
+        end
+
+    end
+
+    def display_thumbnail(user)
+
+        if user.profile_pic.attached?
+            image_tag(url_for(user.profile_pic), class: 'thumbnail')
+        else
+            image_tag("http://linguaviva.com/wp-content/uploads/2017/03/facebook-avatar-300x189.jpg", class: "thumbnail")
         end
 
     end

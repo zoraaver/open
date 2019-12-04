@@ -40,6 +40,10 @@ class User < ApplicationRecord
     self.sent_friend_requests.find_by(id: user.id)
   end
 
+  def friend_request_received?(user)
+    self.received_friend_requests.find_by(id: user.id)
+  end
+
   def find_friendship(user)
     a = Friendship.find_by(user: self, friend: user)
     b = Friendship.find_by(user: user, friend: self)

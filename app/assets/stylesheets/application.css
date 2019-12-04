@@ -18,7 +18,7 @@
  html,
 body {
   height: 100%;
-  background-color: rgb(23, 165, 184);
+  background-color: white;
 }
 
 body {
@@ -33,6 +33,14 @@ nav {
   background-color: black;
   overflow: auto;
 }
+
+.thumbnail {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100px; /* Set a small width */
+}
+
 
 /* Navigation links */
 nav a {

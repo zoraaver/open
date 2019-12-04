@@ -12,6 +12,7 @@
 <h2><%= friend_display(@user) %></h2>
 
 <% @user.friends.each do |u| %>
+    <%= display_thumbnail(u) %><br>
     <p><%= link_to(u.name, user_path(u))%></p>
 <% end %>
 

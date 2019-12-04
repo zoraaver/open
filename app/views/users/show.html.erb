@@ -2,9 +2,7 @@
     <div class="row">
         <div class="col-8">
             <div class="card" style="width: 18rem;">
-                    <% if @user.profile_pic.attached? %>
-                    <img src=<%=(url_for(@user.profile_pic)) %> width="25%" height="25%" class="card-img-top">
-                    <% end %>
+                    <%= display_profile_pic(@user) %>
                 <div class="card-body">
                     <h5 class="card-title"><%= display_profile_header(@user) %></h5>
                     <p class="card-text"><%= @user.bio %></p>
@@ -19,13 +17,13 @@
 
                 <% if current_user != @user %>
                     <div class="card-link">
-                        <p><%= display_friendship_status(@user) %></p>
                         <p><%= link_to("Mutual friends (#{current_user.mutual_friend_count(@user)})", mutual_friends_path(@user))%></p>
+                        <p><%= display_friendship_status(@user) %></p>
                     </div>
                 <% end %>
 
                 </div>
-                </div>
+            </div>
 
 
         </div>

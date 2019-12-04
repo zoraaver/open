@@ -7,8 +7,8 @@
 <%else%>
 
     <% @users.each do |user| %>
-        <%= link_to user.name, user_path(user) -%> 
-        <%= display_friendship_status(user) -%><br>
+        <%= display_thumbnail(user) %><br>
+        <%= link_to user.name, user_path(user) -%><br>
     <% end %>
     
 <%end %>

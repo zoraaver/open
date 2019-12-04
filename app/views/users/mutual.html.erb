@@ -2,6 +2,7 @@
 
 <% if !@mutual_friends.empty? %>
     <% @mutual_friends.each do |u| %>
+        <%= display_thumbnail(u) %><br>
         <p><%= link_to(u.name, user_path(u))%></p>
     <% end %>
 <% end %>
