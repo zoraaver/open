@@ -30,7 +30,8 @@
 
 <h3> Most viewed posts</h3>
 <ul>
-<%@most_views.each do |p|%>
+<%most=@user.posts.most_hit%>
+<%most.each do |p|%>
 <li><%=link_to(p.content, post_path(p))%></li>
 <%end %>
 </ul>
