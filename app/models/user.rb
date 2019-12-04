@@ -59,4 +59,9 @@ class User < ApplicationRecord
   def find_received_friend_request(friend)
     Friendship.find_by(user: friend, friend: self)
   end
+
+  def most_hit
+    posts.most_hit
+  end
+  
 end

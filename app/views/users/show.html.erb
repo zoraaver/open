@@ -14,10 +14,15 @@
     <%= display_friendship_status(@user) %>
 <% end %>
 
+<h3> Most viewed posts</h3>
 
+<ul>
+    <% @user.most_hit.each do |p| %>
+        <li><%= link_to(p.content, post_path(p)) %></li>
+    <% end %>
+</ul>
 
-
-<h2>Posts</h2>
+<h2>All Posts</h2>
 
 
 <% if current_user == @user %>
@@ -28,10 +33,5 @@
     <p><%= link_to(p.content, post_path(p))%></p>
 <% end %>
 
-<h3> Most viewed posts</h3>
-<ul>
-<%most=@user.posts.most_hit%>
-<%most.each do |p|%>
-<li><%=link_to(p.content, post_path(p))%></li>
-<%end %>
-</ul>
+
+
