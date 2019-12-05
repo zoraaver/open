@@ -5,7 +5,6 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, through: :user_conversations
-  has_many :notifications, through: :conversations, source: :messages
   has_one_attached :profile_pic
   validates :name, presence: true
   validates :email, uniqueness: true
@@ -87,7 +86,4 @@ class User < ApplicationRecord
     mutual_friends(user).count
   end
 
-  def unread_messages
-    notifications.where(read: false).count
-  end
 end

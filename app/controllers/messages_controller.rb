@@ -6,8 +6,8 @@ class MessagesController < ApplicationController
 
   before_action :authorize_user
   before_action :privacy_check
-
-  
+  before_action :set_user, only: :create
+  before_action :user_check, only: :create
 
   def index
     
@@ -31,7 +31,6 @@ class MessagesController < ApplicationController
   end
 
   def create
-    
     @message = @conversation.messages.new(message_params)
     if @message.save
       redirect_to conversation_messages_path(@conversation)
@@ -48,10 +47,12 @@ class MessagesController < ApplicationController
     
     if !@conversation.user_ids.include?(current_user.id)
       flash[:notice] = "You are not authorized for this action"
+      redirect_to conversations_path
     end
   end
 
-
-
+  def set_user
+    @user = User.find(params[:message][:user_id])
+  end
   
 end
