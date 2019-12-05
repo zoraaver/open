@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :bio, length: { minimum: 10 }
   has_secure_password
 
+
   def friend_ids
     first = Friendship.where("user_id == #{self.id} AND status == 'accepted'").pluck(:friend_id)
     second = Friendship.where("friend_id == #{self.id} AND status == 'accepted'").pluck(:user_id)
