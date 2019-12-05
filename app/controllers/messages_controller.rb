@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
     end
 
     @message = @conversation.messages.new
+    
   end
 
   def new
@@ -27,6 +28,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    
     @message = @conversation.messages.new(message_params)
     if @message.save
       redirect_to conversation_messages_path(@conversation)

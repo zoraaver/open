@@ -13,7 +13,7 @@
 
 
                     <% if current_user%>
-                    <li class="list-group-item"><p><%=link_to "Mailbox(#{current_user.messages.count})", conversations_path, class: "item"%></p></li>
+                    <li class="list-group-item"><p><%=link_to "Mailbox", conversations_path, class: "item"%></p></li>
                     <%end %>
                   
                 </ul>

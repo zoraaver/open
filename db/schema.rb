@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_113452) do
+ActiveRecord::Schema.define(version: 2019_12_05_141433) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(version: 2019_12_05_113452) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "recipient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -118,6 +116,13 @@ ActiveRecord::Schema.define(version: 2019_12_05_113452) do
     t.integer "hits", default: 1, null: false
     t.index ["average_time"], name: "index_punches_on_average_time"
     t.index ["punchable_type", "punchable_id"], name: "punchable_index"
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "conversation_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
