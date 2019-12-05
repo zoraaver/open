@@ -54,6 +54,10 @@ nav a:hover {
 
   width: 50%
 }
+img {
+  text-align: center;
+}
+
 
 .form-signin {
   width: 100%;
@@ -84,4 +88,8 @@ nav a:hover {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.login-img {
+  margin-left: 400px;
 }
