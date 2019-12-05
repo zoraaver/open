@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_one_attached :profile_pic
   validates :name, presence: true
   validates :email, uniqueness: true
@@ -82,5 +83,4 @@ class User < ApplicationRecord
   def mutual_friend_count(user)
     mutual_friends(user).count
   end
-  
 end
