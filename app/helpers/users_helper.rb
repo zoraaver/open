@@ -55,5 +55,9 @@ module UsersHelper
         end
 
     end
+
+    def other_users(conversation)
+        conversation.users.where("users.id != ?", current_user.id).pluck(:name).join(" ")
+    end
     
 end

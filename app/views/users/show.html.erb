@@ -9,7 +9,12 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Email: <%= @user.email %></li>
-                    <li class="list-group-item"><p>Age: <%= @user.age %></p>
+                    <li class="list-group-item"><p>Age: <%= @user.age %></p></li>
+
+
+                    <% if current_user%>
+                    <li class="list-group-item"><p><%=link_to "Mailbox", conversations_path, class: "item"%></p></li>
+                    <%end %>
                   
                 </ul>
                 <div class="card-body">
