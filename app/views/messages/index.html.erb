@@ -1,3 +1,5 @@
+<h3>Your chat with <%= other_users(@conversation) %></h3>
+
 <% if @over_ten %>
    <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
@@ -22,3 +24,9 @@
 
 
 <%= render({partial: "new_message", locals: {conversation: @conversation, message: @message}})%>
+
+<% if @conversation.non_participants(current_user).size > 0 %>
+    <%= render({partial: "add_user", locals:{conversation: @conversation}})%>
+<% end %>
+
+<%= link_to("Back", conversations_path)%>

@@ -1,0 +1,6 @@
+<%= form_for(conversation) do |f| %>
+
+      <%= f.collection_select :user_ids, conversation.non_participants(current_user), :id, :name%>
+      <%= f.submit "Add Friend"%>
+
+<% end %>

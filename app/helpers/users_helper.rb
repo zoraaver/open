@@ -57,7 +57,11 @@ module UsersHelper
     end
 
     def other_users(conversation)
-        conversation.users.where("users.id != ?", current_user.id).pluck(:name).join(" ")
+        if conversation.user_count > 3
+            conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ") + " and #{conversation.user_count - 3} more."
+        else
+            conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ")
+        end
     end
     
 end
