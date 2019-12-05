@@ -1,0 +1,32 @@
+<h3>Your chat with <%= other_users(@conversation) %></h3>
+
+<% if @over_ten %>
+   <%= link_to 'Show Previous', '?m=all' %>
+<% end %>
+
+<div class="ui segment">
+  <% @messages.each do |message| %>
+    <% if message.body %>
+      <div class="item">
+        <div class="content">
+          <div class="header"><strong><%= message.user.name %></strong> <%= message.message_time %></div>
+          <div class="list">
+            <div class="item">
+              <i class="right triangle icon"></i>
+              <%= message.body %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+<%= render({partial: "new_message", locals: {conversation: @conversation, message: @message}})%>
+
+<% if @conversation.non_participants(current_user).size > 0 %>
+    <%= render({partial: "add_user", locals:{conversation: @conversation}})%>
+<% end %>
+
+<%= link_to("Back", conversations_path)%>
