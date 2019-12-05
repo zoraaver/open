@@ -23,9 +23,10 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
+   <div class= "text-center"> <% if flash[:notice] %>
         <h3><%= flash[:notice] %></h3>
     <% end %>
+    </div>
 
     <%= yield %>
 

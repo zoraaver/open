@@ -58,6 +58,11 @@ nav a:hover {
   background-color: rgb(245, 247, 248);
 }
 
+#create_account {
+
+  width: 50%
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
