@@ -27,28 +27,34 @@
 
 
         </div>
-        <div class="col-4">
-            <h3> Most viewed posts</h3>
 
-                <ul>
-                    <% @user.most_hit.each do |p| %>
-                        <li><%= link_to(p.content, post_path(p)) %></li>
+        <% if current_user.friend?(@user) || @user == current_user %>
+            <div class="col-4">
+                <h3> Most viewed posts</h3>
+
+                    <ul>
+                        <% @user.most_hit.each do |p| %>
+                            <li><%= link_to(p.content, post_path(p)) %></li>
+                        <% end %>
+                    </ul>
+            </div>
+
+            <div class="col-4">
+                    <h2>All Posts</h2>
+
+
+                    <% if current_user == @user %>
+                        <%= render({partial: "posts/form", locals:{post: @post}})%>
                     <% end %>
-                </ul>
-        </div>
 
-        <div class="col-4">
-                <h2>All Posts</h2>
+                    <% @user.posts.order(created_at: :desc).each do |p| %>
+                        <p><%= link_to(p.content, post_path(p))%></p>
+                    <% end %>
+            </div>
+
+        <% end %>
 
 
-                <% if current_user == @user %>
-                    <%= render({partial: "posts/form", locals:{post: @post}})%>
-                <% end %>
-
-                <% @user.posts.order(created_at: :desc).each do |p| %>
-                    <p><%= link_to(p.content, post_path(p))%></p>
-                <% end %>
-        </div>
 
     </div>
 </div>

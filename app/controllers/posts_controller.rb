@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  
   before_action :authorize_user
+  before_action :set_post
+  before_action :set_user
+  before_action :user_check, except: :show
+  before_action :friend_check, only: :show
 
   def show
     @post.punch(request)
@@ -9,7 +13,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
 
     if @post.save
       redirect_to user_path(current_user)
@@ -42,6 +45,22 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    if params[:id]
+      @post = Post.find(params[:id])
+    else
+      @post = Post.new(post_params)
+    end
   end
+
+  def set_user
+    
+    if params[:post]
+        @user = User.find(params[:post][:user_id])
+    else
+        @user = @post.user
+    end
+
+  end
+
+
 end
