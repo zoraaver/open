@@ -18,7 +18,7 @@
  html,
 body {
   height: 100%;
-  background-color: rgb(23, 165, 184);
+  background-color: white;
 }
 
 body {
@@ -48,6 +48,11 @@ nav a {
 /* Add a background color on mouse-over */
 nav a:hover {
   background-color: rgb(245, 247, 248);
+}
+
+#create_account {
+
+  width: 50%
 }
 
 .form-signin {
