@@ -3,6 +3,7 @@
 
   <div class="ui list">
     <div class="item">
+    
       <% @conversations.each do |conversation| %>
           <p><%= link_to other_users(conversation), conversation_messages_path(conversation)%></p>
       <% end %>
@@ -21,5 +22,8 @@
       </div>
 
     <% end %>
+
+
+    <br><br><p><%= link_to("Back", user_path(current_user.id)) %></p>
   </div>
 </div>

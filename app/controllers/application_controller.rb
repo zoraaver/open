@@ -27,9 +27,16 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
     if logged_in?
       if @user != current_user
-        flash[:notice] = "Please don't try to edit other people's account details!"
+        flash[:notice] = "You are not authorized to perform this action."
         redirect_to user_path(current_user)
       end
+    end
+  end
+
+  def friend_check
+    if !current_user.friend?(@user) && current_user != @user
+      flash[:notice] = "You are not friends with this person."
+      redirect_to user_path(current_user)
     end
   end
 

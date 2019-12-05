@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
 
-    before_action :set_comment, except: :create
+    before_action :set_comment
+    before_action :set_user
+    before_action :user_check
 
     def create
-        @comment = Comment.new(comment_params)
 
         if @comment.save
             redirect_to post_path(@comment.post)
@@ -38,6 +39,19 @@ class CommentsController < ApplicationController
     end
 
     def set_comment
-        @comment = Comment.find(params[:id])
+        if params[:id]
+            @comment = Comment.find_by(id: params[:id])
+        else 
+            @comment = Comment.new(comment_params)
+        end
     end
+
+    def set_user
+        if params[:comment]
+            @user = User.find(params[:comment][:user_id])
+        else
+            @user = @comment.user
+        end
+    end
+
 end

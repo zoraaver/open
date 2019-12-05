@@ -21,4 +21,5 @@
 </div>
 
 
-<%= render({partial: "new_message", locals: {conversation: @conversation, message: @message}})%>
+<%= render({partial: "new_message", locals: {conversation: @conversation, message: @message}})%><br><br>
+<p><%=link_to "Back", conversations_path %></p>
