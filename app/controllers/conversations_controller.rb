@@ -24,7 +24,7 @@ class ConversationsController < ApplicationController
 
   def update
     new_user_id = params[:conversation][:user_ids].to_i
-    
+
     @conversation = Conversation.find(params[:id])
 
     UserConversation.create(user_id: new_user_id, conversation_id: @conversation.id)

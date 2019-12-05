@@ -14,13 +14,11 @@ class User < ApplicationRecord
   validates :bio, length: { minimum: 10 }
   has_secure_password
 
-
   def friend_ids
     first = Friendship.where("user_id == #{self.id} AND status == 'accepted'").pluck(:friend_id)
     second = Friendship.where("friend_id == #{self.id} AND status == 'accepted'").pluck(:user_id)
     user_ids = first + second
   end
-
 
   def friends
     User.where(id: self.friend_ids).order(:name)
@@ -92,5 +90,4 @@ class User < ApplicationRecord
   def unread_messages
     notifications.where(read: false).count
   end
-
 end
