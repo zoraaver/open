@@ -32,10 +32,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :authenticate_user
-
-  end
-
   def friend_check
 
     if !current_user.friend?(@user) && current_user != @user
