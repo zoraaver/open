@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    @user = (User.find_by(id: session[:user_id]) || User.new)
+    User.find_by(id: session[:user_id]) || User.new
   end
 
   def logged_in?
@@ -16,6 +16,19 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "You need to login to access this page."
       redirect_to '/login'
     end
+  end
+
+  def user_check
+
+    @user = User.find(params[:id])
+    if logged_in?
+      if @user != current_user
+        flash[:notice] = "Please don't try to edit other people's account details!"
+        redirect_to user_path(current_user)
+      end
+      
+    end
+    
   end
 
 end

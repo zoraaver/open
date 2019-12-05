@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorize_user, except: [:new, :create]
+  before_action :set_user, except: [:index, :new, :create, :friend_requests]
+  before_action :user_check, only: [:update, :destroy, :edit]
 
   def index
     if params[:q]
@@ -8,7 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @post = Post.new
     
   end
@@ -30,11 +31,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+
   end
 
   def update
-    @user = User.find(params[:id])
 
     if @user.update(user_params)
       redirect_to user_path(@user)
@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.friendships.destroy_all
     @user.destroy
     session.delete :user_id
@@ -52,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def friend_page
-    @user = User.find(params[:id])
+
   end
 
   def friend_requests
@@ -62,15 +61,18 @@ class UsersController < ApplicationController
   end
 
   def mutual
-    @person = User.find(params[:id])
-    @mutual_friends = current_user.mutual_friends(@person)
-    @mutual_friend_count = current_user.mutual_friend_count(@person)
+    @mutual_friends = current_user.mutual_friends(@user)
+    @mutual_friend_count = current_user.mutual_friend_count(@user)
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :age, :profile_pic)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
 end
