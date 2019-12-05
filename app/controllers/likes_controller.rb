@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+
+  before_action :authorize_user
   before_action :find_post
   before_action :find_like, only: [:destroy]
 

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
 
   resources :conversations do
-    resources :messages
+    resources :messages, only: [:index, :create]
   end
 
   resources :comments, except: [:show, :new, :index]

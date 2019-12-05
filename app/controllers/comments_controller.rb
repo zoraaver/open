@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+
+    before_action :authorize_user
     before_action :set_comment
     before_action :set_user
     before_action :user_check

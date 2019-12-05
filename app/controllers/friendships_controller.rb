@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
 
+  before_action :authorize_user
+
   def create
     Friendship.create(friends_params)
     redirect_to user_path(params[:friendship][:friend_id])

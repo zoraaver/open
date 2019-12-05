@@ -1,9 +1,16 @@
 class MessagesController < ApplicationController
+
   before_action do
     @conversation = Conversation.find(params[:conversation_id])
   end
 
+  before_action :authorize_user
+  before_action :privacy_check
+
+  
+
   def index
+    
     @messages = @conversation.messages
     if @messages.length > 10
       @over_ten = true
@@ -23,10 +30,6 @@ class MessagesController < ApplicationController
     
   end
 
-  def new
-    @message = @conversation.messages.new
-  end
-
   def create
     
     @message = @conversation.messages.new(message_params)
@@ -40,4 +43,15 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :user_id)
   end
+
+  def privacy_check #checks current user is a participant of the requested conversation
+    
+    if !@conversation.user_ids.include?(current_user.id)
+      flash[:notice] = "You are not authorized for this action"
+    end
+  end
+
+
+
+  
 end
