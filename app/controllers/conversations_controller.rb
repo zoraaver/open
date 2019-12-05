@@ -6,10 +6,20 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    
-    @conversation = Conversation.create(conversation_params)
-    @messages = @conversation.messages
-    redirect_to conversation_messages_path(@conversation)
+    @conversation = Conversation.new(conversation_params)
+
+    @conv = Conversation.all.find { |c|
+      c.user_ids.sort == @conversation.user_ids.sort
+    }
+    if @conv != nil
+      @messages = @conv.messages
+      redirect_to conversation_messages_path(@conv)
+    else
+      @conversation.save
+
+      @messages = @conversation.messages
+      redirect_to conversation_messages_path(@conversation)
+    end
   end
 
   def update
@@ -25,8 +35,6 @@ class ConversationsController < ApplicationController
   private
 
   def conversation_params
-    params.permit(user_ids:[])
+    params.permit(user_ids: [])
   end
-
-  
 end

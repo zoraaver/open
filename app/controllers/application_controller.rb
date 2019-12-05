@@ -33,12 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def friend_check
-
     if !current_user.friend?(@user) && current_user != @user
       flash[:notice] = "You are not friends with this person."
       redirect_to user_path(current_user)
     end
   end
-
 
 end
