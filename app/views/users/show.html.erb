@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-8">
+        <div class="col-4">
             <div class="card" style="width: 18rem;">
                     <%= display_profile_pic(@user) %>
                 <div class="card-body">
@@ -35,7 +35,9 @@
                         <li><%= link_to(p.content, post_path(p)) %></li>
                     <% end %>
                 </ul>
+        </div>
 
+        <div class="col-4">
                 <h2>All Posts</h2>
 
 
@@ -47,5 +49,6 @@
                     <p><%= link_to(p.content, post_path(p))%></p>
                 <% end %>
         </div>
+
     </div>
 </div>
