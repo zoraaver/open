@@ -1,5 +1,4 @@
 class ConversationsController < ApplicationController
-
   before_action :authorize_user
   before_action :conversation_check, only: :create
   before_action :update_check, only: :update
@@ -27,10 +26,9 @@ class ConversationsController < ApplicationController
   end
 
   def update
-
     @conversation = Conversation.find(params[:id])
 
-    UserConversation.create(user_id: new_user_id, conversation_id: @conversation.id)
+    UserConversation.create(user_id: params[:conversation][:user_ids], conversation_id: @conversation.id)
 
     redirect_to conversation_messages_path(@conversation)
   end
@@ -42,8 +40,7 @@ class ConversationsController < ApplicationController
   end
 
   def conversation_check #checks user is the current user and other user is a friend
-    
-    user_ids = params[:user_ids].map{|e| e.to_i}
+    user_ids = params[:user_ids].map { |e| e.to_i }
     friend = User.find(user_ids[1])
 
     if user_ids.length != 2
@@ -55,7 +52,6 @@ class ConversationsController < ApplicationController
       flash[:notice] = "You are not friends with this person."
       redirect_to conversations_path
     end
-
   end
 
   def update_check
@@ -67,7 +63,5 @@ class ConversationsController < ApplicationController
       flash[:notice] = "You are not friends with this person."
       redirect_to conversations_path
     end
-
   end
-
 end
