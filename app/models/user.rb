@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, through: :user_conversations
+  has_many :notifications, dependent: :destroy
   has_one_attached :profile_pic
   validates :name, presence: true
   validates :email, uniqueness: true
@@ -88,6 +89,18 @@ class User < ApplicationRecord
 
   def unread_messages
     self.conversations.sum {|c| c.unread_messages(self)}
+  end
+
+  def notify_of_comment(comment)
+    Notification.create(user: self, comment: comment)
+  end
+
+  def unread_notifications
+    notifications.where(read: false)
+  end
+
+  def unread_notification_count
+    unread_notifications.count
   end
 
 end

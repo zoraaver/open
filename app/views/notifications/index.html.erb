@@ -1,0 +1,7 @@
+<%= render(@notifications) || "No new notifications to display"%><br>
+
+<% if !params[:m]%>
+    <%= link_to('All notifications', '?m=all') %><br>
+<% end %>
+
+<%= link_to("Back", user_path(current_user))%>
