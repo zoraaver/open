@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications, only: :index
   resources :posts, except: [:new, :index] do
     resources :likes, only: [:create, :destroy]
   end
