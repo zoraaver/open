@@ -33,6 +33,13 @@ class ConversationsController < ApplicationController
     redirect_to conversation_messages_path(@conversation)
   end
 
+  def destroy
+   @conversation= Conversation.find(params[:id])
+   @conversation.destroy
+   redirect_to conversations_path
+
+  end 
+
   private
 
   def conversation_params

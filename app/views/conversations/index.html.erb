@@ -5,7 +5,8 @@
     <div class="item">
     
       <% @conversations.each do |conversation| %>
-          <p><%= link_to other_users(conversation), conversation_messages_path(conversation)%></p>
+
+          <p><%= link_to other_users(conversation), conversation_messages_path(conversation)%> <%= link_to "delete conversation", conversation_path(conversation), method: "delete"%></p>
       <% end %>
     </div>
   </div>
