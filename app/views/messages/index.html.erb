@@ -1,4 +1,4 @@
-<h3>Your chat with <%= other_users(@conversation) %></h3>
+<h3>Your chat with <%= conversation_display(@conversation) %></h3>
 
 <% if @over_ten %>
    <%= link_to 'Show Previous', '?m=all' %>

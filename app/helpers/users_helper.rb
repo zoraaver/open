@@ -56,12 +56,28 @@ module UsersHelper
 
     end
 
-    def other_users(conversation)
+    def conversation_display(conversation)
         if conversation.user_count > 3
-            conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ") + " and #{conversation.user_count - 3} more."
+            result = conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ") + " and #{conversation.user_count - 3} more."
         else
-            conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ")
+            result = conversation.users.where("users.id != ?", current_user.id).limit(2).pluck(:name).join(", ")
         end
+
+        if conversation.unread_messages(current_user) > 0 
+            result = result + " (#{conversation.unread_messages(current_user)})"
+        end
+
+        result
+    end
+
+
+    def message_display(user)
+        if current_user == user
+            content_tag(:li, link_to("Messages (#{user.unread_messages})", conversations_path, class: "item"), class: "list-group-item")
+        elsif current_user.friend?(user)
+            content_tag(:li, link_to('Message', conversations_path(user_ids: [current_user.id, user.id]), method: 'post'), class: "list-group-item")
+        end
+
     end
     
 end

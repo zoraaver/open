@@ -86,4 +86,8 @@ class User < ApplicationRecord
     mutual_friends(user).count
   end
 
+  def unread_messages
+    self.conversations.sum {|c| c.unread_messages(self)}
+  end
+
 end

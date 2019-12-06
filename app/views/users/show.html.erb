@@ -10,13 +10,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Email: <%= @user.email %></li>
-                    <li class="list-group-item"><p>Age: <%= @user.age %></p></li>
-
-
-                    <% if current_user == @user%>
-                        <li class="list-group-item"><p><%=link_to "Mailbox", conversations_path, class: "item"%></p></li>
-                    <%end %>
-                  
+                    <li class="list-group-item">Age: <%= @user.age %></li>
+                    <%= message_display(@user) %>
                 </ul>
                 <div class="card-body">
                     <p class="card-link"><%= link_to("Friends (#{@user.friend_count})", user_friends_path(@user))%></p>

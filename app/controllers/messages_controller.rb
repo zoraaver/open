@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
 
   def index
     
+    @conversation.mark_messages_as_read(current_user)
     @messages = @conversation.messages
     if @messages.length > 10
       @over_ten = true
