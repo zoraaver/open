@@ -9,16 +9,21 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <nav>
+
+
+ 
+  <nav>
       <% if session[:user_id] %>
         <p>
+        <%= image_tag 'opensign.jpg', class:"img-fluid" %>
+      
           <%= link_to("My Profile", user_path(current_user))%>
           <%= link_to("Friend Requests (#{current_user.received_friend_requests_count})", friend_requests_path(current_user))%>
           <%= link_to("Update your account", edit_user_path(current_user)) %>
           <%= link_to("Log out", session_path(current_user.id), method: :delete) %>
         </p>
       <% end %>
-    </nav>
+    </nav> 
 
   </head>
 
