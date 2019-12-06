@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def show
     @post.punch(request)
-
+    @post.mark_comments_read(current_user)
     @comment = Comment.new
   end
 

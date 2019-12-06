@@ -9,6 +9,8 @@ class CommentsController < ApplicationController
     def create
 
         if @comment.save
+            @user = @comment.post.user
+            @user.notify_of_comment(@comment)
             redirect_to post_path(@comment.post)
         else
             flash[:notice] = "Comment must have content!"

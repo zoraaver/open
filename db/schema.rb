@@ -100,8 +100,9 @@ ActiveRecord::Schema.define(version: 2019_12_06_105034) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string "body"
+    t.integer "comment_id"
     t.integer "user_id"
+    t.boolean "read", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
